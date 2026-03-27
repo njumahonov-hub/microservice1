@@ -7,6 +7,9 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProductService {
+  find() {
+    throw new Error('Method not implemented.');
+  }
   constructor(@InjectRepository(Product) private productRepo: Repository<Product>) {}
  async  create(createProductDto: CreateProductDto) {
     const product = await this.productRepo.create(createProductDto)
@@ -17,17 +20,17 @@ export class ProductService {
     return await this.productRepo.find();
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const product = await this.productRepo.findOne({where: {id}})
     return  product ;
   }
 
-  async update(id: number, updateProductDto: UpdateProductDto) {
+  async update(id: string, updateProductDto: UpdateProductDto) {
     const product = await this.productRepo.findOne({where: {id}})
     return await this.productRepo.update(id, updateProductDto);
   }
 
-async  remove(id: number) {
+async  remove(id: string) {
     return await this.productRepo.delete(id);
   }
 }
